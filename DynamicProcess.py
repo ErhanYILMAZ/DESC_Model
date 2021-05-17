@@ -70,7 +70,7 @@ for erhan in range(len(temps)):
         
 # Read modelocv.json file that contains parameters just for OCV data
 # Such OCV0, OCVrel OCVeta Q etc.
-with open('model_files/DESC1Model.json') as json_file:
+with open('model_files/modelocv.json') as json_file:
     model = json.load(json_file)
 
 # Create array for parameters g, RC1, M, R0dch, R0cha, and R1 

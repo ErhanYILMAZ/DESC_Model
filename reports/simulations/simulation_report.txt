@@ -1,0 +1,12 @@
+
+Simulation Results for DESC Model with 1-RC
+
+Simulated Output Voltage RMSE=15.22mV at -5°C Temp
+Simulated Output Voltage RMSE=15.11mV at 05°C Temp
+Simulated Output Voltage RMSE=15.89mV at 15°C Temp
+Simulated Output Voltage RMSE=14.82mV at 25°C Temp
+Simulated Output Voltage RMSE=11.03mV at 35°C Temp
+Simulated Output Voltage RMSE=8.79mV at 45°C Temp
+
+Start Time =17/05/2021 16:24:45
+Stop Time =17/05/2021 16:25:30

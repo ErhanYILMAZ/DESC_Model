@@ -135,7 +135,7 @@ for erhan in range(len(temps)):
     # We initialize our Double Enhanced Self Correcting Model wit 1-RC branch
     # at specified test emperature and sample period is 1s
 
-    cell = DESC_1RC(model=model , temp=temps[erhan], dt=1.0, use_OCVS=True)
+    cell = DESC_1RC(model=model , temp=temps[erhan], dt=1.0, use_OCVS=False)
     fun.counter=0
 
     teta = cell.ocv

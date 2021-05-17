@@ -2,6 +2,9 @@
  Double Enhanced Self Correcting Model
 
 
+![alt text](https://github.com/ErhanYILMAZ/DESC_Model/blob/main/DESC_docs/DESC_Model.png)
+
+
 Double Enhanced Self Correcting(DESC) model is an Electrical Equivalent Circuit Model 
 for lithium-ion batteries that also can be used for other battery types. 
 Related article for DESC can be accessed here <DESC paper link will be here hopefully later>
@@ -54,3 +57,7 @@ Plot_OCV_Data.py can be used to plot OCV test data
 ## Example Plots
 
 ![alt text](https://github.com/ErhanYILMAZ/DESC_Model/blob/main/figures/estimations/estimated_parameters.png)
+
+![alt text](https://github.com/ErhanYILMAZ/DESC_Model/blob/main/figures/estimations/OCV_SLSQP_est_with_OCV0_and_OCVrel_temp_25.png)
+
+![alt text](https://github.com/ErhanYILMAZ/DESC_Model/blob/main/figures/estimations/rmse_output_voltage_of_SLSQP_OCV_est.png)

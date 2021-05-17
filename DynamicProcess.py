@@ -70,7 +70,7 @@ for erhan in range(len(temps)):
         
 # Read modelocv.json file that contains parameters just for OCV data
 # Such OCV0, OCVrel OCVeta Q etc.
-with open('model_files/modelocv.json') as json_file:
+with open('model_files/DESC1Model.json') as json_file:
     model = json.load(json_file)
 
 # Create array for parameters g, RC1, M, R0dch, R0cha, and R1 
@@ -269,7 +269,7 @@ for erhan in range(len(temps)):
     plt.show()
 
     # Save the plot
-    plt.savefig('figures/estimations/param_est_temp_%02d.png' % temps[erhan], dpi=600)
+    plt.savefig('figures/estimations/param_est_temp_%02d.png' % temps[erhan], dpi=600, bbox_inches='tight')
     
     # Print rmse value
     print('Simulation with Estimated Parameters')
@@ -291,7 +291,7 @@ plt.ylabel('RMSE of Output Voltage(mV)', fontsize = yfontsize, fontweight = 'bol
 
 # Tighten the plot and save
 fig.tight_layout()
-plt.savefig('figures/estimations/rmse_output_voltage_of_param_est.png', dpi=600)
+plt.savefig('figures/estimations/rmse_output_voltage_of_param_est.png', dpi=600, bbox_inches='tight')
 
 
 # Create a report file and write results.
@@ -349,7 +349,7 @@ a[3,1].set_ylabel('Q(Ah)', fontsize = yfontsize, fontweight = 'bold')
 
 # Tighten the plot and save
 fig.tight_layout()
-plt.savefig('figures/estimations/estimated_parameters.png', dpi=600)
+plt.savefig('figures/estimations/estimated_parameters.png', dpi=600, bbox_inches='tight')
 
 
 for erhan in range(len(temps)):

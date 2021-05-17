@@ -41,7 +41,7 @@ mags= [20, 20, 40, 50, 50, 50]
 
 # Read modelocv.json file that contains parameters just for OCV data
 # Such OCV0, OCVrel OCVeta Q etc.
-with open('model_files/DESC1Model_NLSQ.json') as json_file:
+with open('model_files/DESC1Model_SLSQP.json') as json_file:
     model = json.load(json_file)
 
 # Define variable for rmse value

@@ -224,7 +224,7 @@ for erhan in range(len(temps)):
 
 
 # Save the model file with estimated parameters
-with open('DESC1Modeltest.json', 'w') as fp:
+with open('DESC1Model.json', 'w') as fp:
     json.dump(model, fp)
     
    

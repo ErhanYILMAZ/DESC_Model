@@ -38,10 +38,10 @@ ocv.py uses charge and discharge test data and takes its average to obtain rough
 ## 2. Model Parameters Estimation from Dynmaic Data
 Run DynamicProcess.py file. That starts parameter estimation for DESC model with dynamic test dataset. Since I used 1-RC branch for my model there are 8 paramerters. These are Eta, Q, M, g, R1, RC1, R0cha, R0dch respectively. Eta and Q can be directly calculated from the test data and for the rest I ran nonlinear least squares optimization from scipy.optimize.least_squares. There are many tricks and to lelarn about this library. Thus I recommend you to don't change settings at the beggining. For example tolerance values I used xtol=ftol=gtol=1e-6. This provides more aggressive optimisation but takes longer time. After parameter estimation one can run ocv estimation and then again parameter estimation with lower tolerance values(like 1e-8). That provides better estimation results.
  
- 
 DynamicProcess.py takes ocvmodel.json files and read test data and does parameter optimisation. After optimisation all results will be saved in the json file with name DESC1Model.json file. This file include estimated parameters but not OCV curves. 
 
-
+!["An Example Plots of Estimated Parameters"](https://github.com/ErhanYILMAZ/DESC_Model/blob/main/figures/estimations/estimated_parameters.png)
+ 
 ## 3. OCV Curves Estimation from Dynamic Data
 At first step we have got OCV with basic averaging and inter/extrapolation. This gives as OCV curves for each temperature in a array with 201 elements.
 So if we treat this arrays as parameter then we can do optimisation also on OCV curves. But this time we have 201 parameters instead of 6.
@@ -63,7 +63,6 @@ Plot_OCV_Data.py can be used to plot OCV test data
 
 ## Example Plots
 
-![alt text](https://github.com/ErhanYILMAZ/DESC_Model/blob/main/figures/estimations/estimated_parameters.png)
 
 ![alt text](https://github.com/ErhanYILMAZ/DESC_Model/blob/main/figures/estimations/OCV_SLSQP_est_with_OCV0_and_OCVrel_temp_25.png)
 

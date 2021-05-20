@@ -26,7 +26,6 @@ http://mocha-java.uccs.edu/ECE5710/index.html
 http://mocha-java.uccs.edu/ECE5710/ECE5710-Notes02.pdf
 """
 
-
 import os
 import time
 import json
@@ -167,23 +166,29 @@ for erhan in range(len(temps)):
     
     # Save estimated parameters for related temperature value
     OCVs_Raw[erhan] = res[erhan].x
-    
+
     
 # NLS Optimisation creates ripples on the OCV curves those don't effect models behavior
-# but has no physcal meaning. Thus we have used polynomial fitting here to get smooth ocv curves.
+# but has no physical meaning. Thus we have used polynomial fitting here to get smooth ocv curves.
 # Thus smoothing might change rms error sligthy but this is trivial.
 
-x=np.linspace(0,1,len(model['SOC']))
+soc=np.linspace(0,1,len(model['SOC']))
 OCVs={}
 for erhan in range(len(temps)):
-    mymodel = np.poly1d(np.polyfit(x, OCVs_Raw[erhan], 500))
-    OCVs[erhan] = mymodel(x)
-    
+    mymodel = np.poly1d(np.polyfit(soc, OCVs_Raw[erhan], 500))
+    OCVs[erhan] = mymodel(soc)
     plt.figure()
-    plt.plot(x, OCVs_Raw[erhan])
-    plt.plot(x, OCVs[erhan]+.1)
+    plt.plot(soc*100, OCVs_Raw[erhan], color=colors[erhan], label='NLSQ + Interp')
+    plt.plot(soc*100, OCVs[erhan], label='NLSQ')
+    plt.legend()
+    plt.xlabel('SoC(%)', fontsize = xfontsize, fontweight = 'bold')
+    plt.ylabel('Voltage(V)', fontsize = yfontsize, fontweight = 'bold')
+    plt.title('Estimated SOC Curve at T=%02d °C' % (temps[erhan]))
     plt.show()
-
+    
+    #Save the plot
+    plt.savefig('figures/OCV_NLSQP_est/estimated_OCV_with_NLSQ_at_temp_%02d.png' % temps[erhan], dpi=600, bbox_inches='tight')
+  
 # get stop time an format in as in proper string
 now = datetime.now()
 stop = now.strftime("%d/%m/%Y %H:%M:%S")
@@ -221,6 +226,7 @@ model['OCV_P45'] = list(OCVs[5])
 # non linear least squares method used for estimation
 with open('model_files/DESC1Model_NLSQ.json', 'w') as fp:
     json.dump(model, fp)
+
 
 # Get stop time
 now = datetime.now()
@@ -264,7 +270,7 @@ for erhan in range(len(temps)):
     plt.show()
     
     # Save the plot
-    plt.savefig('figures/estimations/OCV_NLSQ_est_with_OCVs_temp_%02d.png' % temps[erhan], dpi=600, bbox_inches='tight')
+    plt.savefig('figures/OCV_NLSQP_est/OCV_NLSQ_est_with_OCVs_temp_%02d.png' % temps[erhan], dpi=600, bbox_inches='tight')
     
     # Print rmse value
     print('Simulation with OCV Curves')
@@ -281,7 +287,7 @@ plt.ylabel('RMSE of Output Voltage(mV)', fontsize = yfontsize, fontweight = 'bol
 
 # Tighten the plot and save
 fig.tight_layout()
-plt.savefig('figures/estimations/rmse_output_voltage_of_NLSQ_OCV_est.png', dpi=600, bbox_inches='tight')
+plt.savefig('figures/OCV_NLSQP_est/rmse_output_voltage_of_NLSQ_OCV_est.png', dpi=600, bbox_inches='tight')
 
 
 f.write('\n')
@@ -324,7 +330,7 @@ for erhan in range(len(temps)):
     plt.show()
 
     # Save the plot
-    plt.savefig('figures/estimations/OCV_NLSQ_est_with_OCV0_and_OCVrel_temp_%02d.png' % temps[erhan], dpi=600, bbox_inches='tight')
+    plt.savefig('figures/OCV_NLSQP_est/OCV_NLSQ_est_with_OCV0_and_OCVrel_temp_%02d.png' % temps[erhan], dpi=600, bbox_inches='tight')
     
     # Print rmse value
     print('Simulation with OCV0 and OCVrel')
@@ -340,7 +346,7 @@ plt.ylabel('RMSE of Output Voltage(mV)', fontsize = yfontsize, fontweight = 'bol
 
 # Tighten the plot and save
 fig.tight_layout()
-plt.savefig('figures/estimations/rmse_output_voltage_of_NLSQ_OCV0_OCVrel_est.png', dpi=600, bbox_inches='tight')
+plt.savefig('figures/OCV_NLSQP_est/rmse_output_voltage_of_NLSQ_OCV0_OCVrel_est.png', dpi=600, bbox_inches='tight')
 
 
 

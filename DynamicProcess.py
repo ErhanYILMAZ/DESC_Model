@@ -162,7 +162,7 @@ jac='cs'
 method='trf'
 machine_epsilon = np.finfo(float).eps
 #xtol=ftol=gtol=machine_epsilon
-xtol=ftol=gtol=1e-6
+xtol=ftol=gtol=1e-8
 x_scale='jac'
 loss='soft_l1'
 f_scale=1
@@ -224,7 +224,7 @@ for erhan in range(len(temps)):
 
 
 # Save the model file with estimated parameters
-with open('DESC1Model.json', 'w') as fp:
+with open('model_files/DESC1Model.json', 'w') as fp:
     json.dump(model, fp)
     
    
@@ -269,7 +269,7 @@ for erhan in range(len(temps)):
     plt.show()
 
     # Save the plot
-    plt.savefig('figures/estimations/param_est_temp_%02d.png' % temps[erhan], dpi=600, bbox_inches='tight')
+    plt.savefig('figures/param_est/param_est_temp_%02d.png' % temps[erhan], dpi=600, bbox_inches='tight')
     
     # Print rmse value
     print('Simulation with Estimated Parameters')
@@ -291,7 +291,7 @@ plt.ylabel('RMSE of Output Voltage(mV)', fontsize = yfontsize, fontweight = 'bol
 
 # Tighten the plot and save
 fig.tight_layout()
-plt.savefig('figures/estimations/rmse_output_voltage_of_param_est.png', dpi=600, bbox_inches='tight')
+plt.savefig('figures/param_est/rmse_output_voltage_of_param_est.png', dpi=600, bbox_inches='tight')
 
 
 # Create a report file and write results.
@@ -349,7 +349,7 @@ a[3,1].set_ylabel('Q(Ah)', fontsize = yfontsize, fontweight = 'bold')
 
 # Tighten the plot and save
 fig.tight_layout()
-plt.savefig('figures/estimations/estimated_parameters.png', dpi=600, bbox_inches='tight')
+plt.savefig('figures/param_est/estimated_parameters.png', dpi=600, bbox_inches='tight')
 
 
 for erhan in range(len(temps)):

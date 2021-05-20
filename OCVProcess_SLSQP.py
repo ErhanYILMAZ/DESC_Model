@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+
 """
 Copyright (c) 2021 by Erhan YILMAZ (https://orcid.org/0000-0003-4788-9022)
 This file is licensed under CC BY-SA (Attribution-ShareAlike)
@@ -69,7 +70,7 @@ for erhan in range(len(temps)):
         script3 = "dyn_data/THUN100_DYN_%02d_N%02d_S3.csv" %(mags[erhan], np.abs(temps[erhan]))  
         data[erhan]['script3'] = pd.read_csv(script3)
     
-    
+	
 # Read modelocv.json file that contains parameters just for OCV data
 # Such OCV0, OCVrel, OCVeta Q etc.
 with open("model_files/DESC1Model.json", 'r') as json_file:
@@ -103,10 +104,11 @@ fun.counter=0
 # https://docs.scipy.org/doc/scipy/reference/tutorial/optimize.html#sequential-least-squares-programming-slsqp-algorithm-method-slsqp
 
 method='SLSQP'
-options = {'ftol': 1e-4, 'disp': True}
+options = {'ftol': 1e-6, 'disp': True}
 ineq_cons = {'type': 'ineq',
              'fun' : lambda x: np.diff(x)
 }
+
 
 # Plot estimated paramaters together
 xfontsize = 12
@@ -135,7 +137,7 @@ for erhan in range(len(temps)):
     # We initialize our Double Enhanced Self Correcting Model wit 1-RC branch
     # at specified test emperature and sample period is 1s
 
-    cell = DESC_1RC(model=model , temp=temps[erhan], dt=1.0, use_OCVS=True)
+    cell = DESC_1RC(model=model , temp=temps[erhan], dt=1.0, use_OCVS=False)
     fun.counter=0
 
     teta = cell.ocv
@@ -158,7 +160,21 @@ for erhan in range(len(temps)):
     
     # Save estimated parameters for related temperature value
     OCVs[erhan] = res[erhan].x
+
+# Save estimatedd OCV curves    
+soc=np.linspace(0,1,len(model['SOC']))
+for erhan in range(len(temps)):
+    plt.figure()
+    plt.plot(soc*100, OCVs[erhan], color=colors[erhan], label='SLSQP')
+    plt.legend()
+    plt.xlabel('SoC(%)', fontsize = xfontsize, fontweight = 'bold')
+    plt.ylabel('Voltage(V)', fontsize = yfontsize, fontweight = 'bold')
+    plt.title('Estimated SOC Curve at T=%02d °C' % (temps[erhan]))
+    plt.show()
     
+    #Save the plot
+    plt.savefig('figures/OCV_SLSQP_est/estimated_OCV_with_SLSQP_at_temp_%02d.png' % temps[erhan], dpi=600, bbox_inches='tight')
+ 
 
 # After OCV estimation for each temperature, OCV0 and OCVrel can be
 # obtained below by the least squares estimation. This gives moreles same
@@ -231,7 +247,7 @@ for erhan in range(len(temps)):
     plt.show()
     
     # Save the plot
-    plt.savefig('figures/estimations/OCV_SLSQP_est_with_OCVs_temp_%02d.png' % temps[erhan], dpi=600, bbox_inches='tight')
+    plt.savefig('figures/OCV_SLSQP_est/OCV_SLSQP_est_with_OCVs_temp_%02d.png' % temps[erhan], dpi=600, bbox_inches='tight')
     
     # Print rmse value
     print('Simulation with OCV Curves')
@@ -247,7 +263,7 @@ plt.ylabel('RMSE of Output Voltage(mV)', fontsize = yfontsize, fontweight = 'bol
 
 # Tighten the plot and save
 fig.tight_layout()
-plt.savefig('figures/estimations/rmse_output_voltage_of_SLSQP_OCV_est.png', dpi=600, bbox_inches='tight')
+plt.savefig('figures/OCV_SLSQP_est/rmse_output_voltage_of_SLSQP_OCV_est.png', dpi=600, bbox_inches='tight')
 
 
 f.write('\n')
@@ -290,7 +306,7 @@ for erhan in range(len(temps)):
     plt.show()
  
     #Save the plot
-    plt.savefig('figures/estimations/OCV_SLSQP_est_with_OCV0_and_OCVrel_temp_%02d.png' % temps[erhan], dpi=600, bbox_inches='tight')
+    plt.savefig('figures/OCV_SLSQP_est/OCV_SLSQP_est_with_OCV0_and_OCVrel_temp_%02d.png' % temps[erhan], dpi=600, bbox_inches='tight')
     
     # Print rmse value
     print('Simulation with OCV0 and OCVrel')
@@ -306,7 +322,7 @@ plt.ylabel('RMSE of Output Voltage(mV)', fontsize = yfontsize, fontweight = 'bol
 
 # Tighten the plot and save
 fig.tight_layout()
-plt.savefig('figures/estimations/rmse_output_voltage_of_SLSQP_OCV0_OCVrel_est.png', dpi=600, bbox_inches='tight')
+plt.savefig('figures/OCV_SLSQP_est/rmse_output_voltage_of_SLSQP_OCV0_OCVrel_est.png', dpi=600, bbox_inches='tight')
 
 
 f.write('\n')

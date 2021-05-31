@@ -47,9 +47,18 @@ with open('model_files/DESC1Model_SLSQP.json') as json_file:
 # Define variable for rmse value
 rmse = np.zeros(len(temps))
 
-# Define font size for labels
+# Define font size for labels and colors
 xfontsize = 12
 yfontsize = 12
+colors=['b', # blue
+        'g', #green
+        'r', #red
+        'c', #cyan
+        'm', #magenta
+        'y',# yellow
+        'orange', #orange
+        'purple', #purple
+        ]
 
 for erhan in range(len(temps)):
 
@@ -72,13 +81,14 @@ for erhan in range(len(temps)):
     plt.figure()
     est_voltage = cell.fun([1.0,0.0,0.0],current)
     rmse[erhan]=np.sqrt(((voltage - est_voltage) ** 2).mean())
-    plt.plot(time, est_voltage)
-    plt.plot(time, voltage)
+    plt.plot(time, est_voltage, color=colors[erhan], label='Simulation')
+    plt.plot(time, voltage, label='True')
+    plt.legend()
     plt.xlabel('Time(h)', fontsize = xfontsize, fontweight = 'bold')
     plt.ylabel('Voltage', fontsize = xfontsize, fontweight = 'bold')
     plt.title('Estimated Output Voltage for T=%02d, RMSE = %2.2fmV' % (temps[erhan],rmse[erhan]*1000))
     plt.show()
-    plt.savefig('figures/simulations/Simulation_T_%02d_RMSE_%2.2fmV.png' % (temps[erhan],rmse[erhan]*1000), dpi=600, bbox_inches='tight')
+    plt.savefig('figures/simulations/Simulation_T_%02d.png' % temps[erhan], dpi=600, bbox_inches='tight')
     # Print rms error.
     print('RMS=%fmV'%(rmse[erhan]*1000))
     print('------------------------------------------------------------')

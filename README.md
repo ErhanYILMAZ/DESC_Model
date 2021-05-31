@@ -69,14 +69,14 @@ Plot_OCV_Data.py can be used to plot OCV test data
 ## Example Plots
 
 
-![alt text](https://github.com/ErhanYILMAZ/DESC_Model/blob/main/figures/simulations/Simulation_T_-5_RMSE_15.22mV.png)
+![alt text](https://github.com/ErhanYILMAZ/DESC_Model/blob/main/figures/simulations/Simulation_T_-5.png)
 
-![alt text](https://github.com/ErhanYILMAZ/DESC_Model/blob/main/figures/simulations/Simulation_T_05_RMSE_15.11mV.png)
+![alt text](https://github.com/ErhanYILMAZ/DESC_Model/blob/main/figures/simulations/Simulation_T_05.png)
 
-![alt text](https://github.com/ErhanYILMAZ/DESC_Model/blob/main/figures/simulations/Simulation_T_15_RMSE_15.89mV.png)
+![alt text](https://github.com/ErhanYILMAZ/DESC_Model/blob/main/figures/simulations/Simulation_T_15.png)
 
-![alt text](https://github.com/ErhanYILMAZ/DESC_Model/blob/main/figures/simulations/Simulation_T_25_RMSE_14.82mV.png)
+![alt text](https://github.com/ErhanYILMAZ/DESC_Model/blob/main/figures/simulations/Simulation_T_25.png)
 
-![alt text](https://github.com/ErhanYILMAZ/DESC_Model/blob/main/figures/simulations/Simulation_T_35_RMSE_11.03mV.png)
+![alt text](https://github.com/ErhanYILMAZ/DESC_Model/blob/main/figures/simulations/Simulation_T_35.png)
 
-![alt text](https://github.com/ErhanYILMAZ/DESC_Model/blob/main/figures/simulations/Simulation_T_45_RMSE_8.79mV.png)
+![alt text](https://github.com/ErhanYILMAZ/DESC_Model/blob/main/figures/simulations/Simulation_T_45.png)

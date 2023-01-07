@@ -7,7 +7,6 @@
 
 Double Enhanced Self Correcting(DESC) model is an Electrical Equivalent Circuit Model 
 for lithium-ion batteries that also can be used for other battery types. 
-Related article for DESC can be accessed here <DESC paper link will be here hopefully later>
 
 DESC is an enhanced  derivative of Enhanced Self Correcting(ESC) Model from Gregor Plett.  
 Thus, same documentation for ESC model and DESC model article can be used as referenced to understand 
